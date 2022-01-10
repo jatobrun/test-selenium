@@ -67,7 +67,7 @@ const config = {
             items: [
               {
                 label: 'Tutorial',
-                to: '/docs/intro',
+                to: '/',
               },
             ],
           },
@@ -76,7 +76,7 @@ const config = {
             items: [
               {
                 label: 'Linkedin',
-                href: 'www.linkedin.com/in/jamil-andres-torres-brunes-0b20631a5',
+                href: 'https://www.linkedin.com/in/jamil-andres-torres-brunes-0b20631a5',
               },
               {
                 label: 'Github Profile',

@@ -3,7 +3,7 @@ sidebar_position: 1
 slug: /
 ---
 
-# Tutorial Intro
+# Intro
 
 Let's discover **My Test for ioe in less than 5 minutes**.
 
