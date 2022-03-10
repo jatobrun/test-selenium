@@ -24,6 +24,9 @@ class Espol(webdriver.Chrome):
         main_page.go_to_education_page()
 
     def exercise_1(self):
+        """
+        
+        """
         education_page = page.EducationPage(self)
         education_page.get_faculties()
         education_page.get_all_majors_name()

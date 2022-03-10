@@ -7,13 +7,15 @@ class Constants:
     EDUCATION_BUTTON_TEXT = "Educación"
     IMPLICITY_WAIT_TIME = 10
     EDUCATION_BUTTON_HREF_TEXT = "/educacion"
-
+    CSV_PATH = "./src/static/output.csv"
 
 class MainPageLocators(object):
     EDUCATION_BUTTON = (
         By.XPATH,
-        f"//a[contains(@href, \
-                        '{Constants.EDUCATION_BUTTON_HREF_TEXT}')]",
+        (
+            f"//a[contains(@href, 
+            '{Constants.EDUCATION_BUTTON_HREF_TEXT}')]"
+        ),
     )
 
 

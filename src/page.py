@@ -32,7 +32,7 @@ class MainPage(BasePage):
 class EducationPage(BasePage):
     """Education page action methods"""
 
-    first_block_faculty_names = []
+    first_block_faculty_names: List[str] = []
     second_block_faculty_names = []
     majors_per_faculty = []
 
@@ -44,8 +44,8 @@ class EducationPage(BasePage):
             self.driver.find_element(*faculty_block)
             for faculty_block in locators.EducationPageLocators.FACULTY_BLOCKS
         ]
-        self.first_block_faculty_names = faculty_block_elements[0].text.split("\n")
-        self.second_block_faculty_names = faculty_block_elements[1].text.split("\n")
+        self.first_block_faculty_names = faculty_block_elements[0].text.splitlines()
+        self.second_block_faculty_names = faculty_block_elements[1].text.splitlines()
 
     def get_all_majors_name(self):
         """Get all majors name in all faculties"""
@@ -96,8 +96,9 @@ class EducationPage(BasePage):
     def get_majors_url_per_major_block(self, major_list, index, block_number):
         major_dict = {}
         for major in major_list:
+            major_selector = f"//a[text()='{major}']"
             url = self.driver.find_element_by_xpath(
-                f"//a[text()='{major}']"
+                selector
             ).get_attribute("href")
 
             is_valid_link = self.is_valid_link(url)
@@ -122,9 +123,9 @@ class EducationPage(BasePage):
         Returns:
             Boolean: True if the string is a valid url, otherwise is false
         """
-        return False if not validators.url(url) else True
+        return True if validators.url(url) else False
 
-    def major_is_abet(self, major):
+    def major_is_abet(self, major) -> bool:
         """This functions helps to know if a major have the abet certifications
 
         Args:
@@ -139,6 +140,7 @@ class EducationPage(BasePage):
             return self.driver.find_element(
                 *locators.MajorsPageLocators.ABET_LINK
             ).is_enabled()
+        return False
 
     def get_abet_majors(self, majors):
         """Search all the abet majors in a group o majors
@@ -158,7 +160,7 @@ class EducationPage(BasePage):
             majors (list): A list of all majors in a university
         """
         fieldnames = ["name", "faculty", "url", "is_valid_link"]
-        with open("./src/static/output.csv", "w", encoding="UTF8", newline="") as f:
+        with open(const.CSV_PATH, "w", encoding="UTF8", newline="") as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(majors)
